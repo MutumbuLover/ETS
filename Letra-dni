@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Dni {
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingresa tu DNI:");
+        String dni_usuario = scanner.nextLine();
+
+        // Separamos el número del DNI y la letra
+        String numeroDni = dni_usuario.substring(0, dni_usuario.length() - 1);
+        char letraDni = dni_usuario.charAt(dni_usuario.length() - 1);
+
+        int dni_numero = Integer.parseInt(numeroDni);
+
+        if (comprobarDNI(dni_numero, letraDni)) {
+            System.out.println("El DNI es válido.");
+        } else {
+            System.out.println("El DNI no es válido.");
+        }
+
+        scanner.close();
+    }
+
+    // Función para calcular la letra del DNI y comprobar si es correcta
+    public static boolean comprobarDNI(int dni_numero, char letra_usuario) {
+        int sumaletra = dni_numero % 23;
+
+        char[] letras = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 
+                         'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+
+        char letra_calculada = letras[sumaletra];
+
+        return letra_usuario == letra_calculada; // Devuelve true si la letra coincide
+    }
+}
